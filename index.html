@@ -3,45 +3,42 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Main</title>
+    <title>Home</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-    <video loop autoplay replay muted>
-        <source src="images/beach.mp4" type="video/mp4">
-    </video>
+<section class="slider">
 
-    <img src="images/travel.jpg" alt="">
+  <video id="video" autoplay muted loop></video>
+  <video id="video2" autoplay muted loop></video>
 
-    <header>
-        <ul>
-            <li><a href="home.html">Home</a></li>
-            <li><a href="faq.html">Tours</a></li>
-            <li><a href="aboutus.html">About</a></li>
-            <li><a href="">Contact</a></li>
-        </ul>
-    </header>
+  <header class="header">
 
-<div>
-    <h1 id="beach">BEACH</h1>
-    
-</div>
-<a id="explore" href="">Explore</a>
+    <button class="hamburger" id="hamburger">☰</button>    
 
+    <nav id="nav" class="nav">
+      <a id="active" href="index.html">Home</a>
+      <a href="tours.html">Tours</a>
+      <a href="about.html">About</a>
+      <a href="profile.html">Profile</a>
+    </nav>
 
+  </header>
 
+    <div id="box1">
+        <h3 id="travel">TRAVEL ANY SEASON</h3>
+        <h1 id="season"></h1>
+        <a id="login" href="login.html">Log In</a>
+    </div>
+  
+</section>
 
-
-
-
-
-<div id="fixproblem"></div>
 <hr class="hr1">
 
-<div class="white"></div>
-<div class="transparent"></div>
-<div class="main"></div>
+<section class="content">
+  <!-- CONTENT -->
+</section>
 
 
 
@@ -49,20 +46,109 @@
 
 
     <footer>
-        <div>
-            <p class="policy2">travel.company@info.com</p>
-            <p class="policy2">Str. Filan Fisteku</p>
-            <img src="images/instagram.png" alt="">
-            <img src="images/facebook.png" alt="">
-            <img src="images/twitter.png" alt="">
-        </div>
-        <div>
-            <p class="policy-position"><a class="policy" href="">Terms of services</a> | <a class="policy" href="">Privacy policy</a></p> 
-            <p class="policy-position">© Travel Company 2025</p>
-            <p class="policy-position"><a class="policy" href="">Back to top ↑</a></p>
-        </div>   
-    </footer>
+  <div class="footer-left">
+    <p>travel.company@info.com</p>
+    <p>Str. Filan Fisteku</p>
+
+    <div class="socials">
+      <img src="images/instagram.png" alt="">
+      <img src="images/facebook.png" alt="">
+      <img src="images/twitter.png" alt="">
+    </div>
+  </div>
+
+  <div class="footer-right">
+    <p><a href="">Terms of services</a> | <a href="">Privacy policy</a></p>
+    <p>© Travel Company 2025</p>
+    <p><a href="">Back to top ↑</a></p>
+  </div>
+</footer>
 
 
 </body>
 </html>
+
+<script>
+
+//KRIJIMI I ARRAY (ELEMENTET)
+const slides = 
+[
+  { video: "images/spring.mp4"  , season: "SPRING"},
+  { video: "images/summer.mp4" , season: "SUMMER"},
+  { video: "images/autumn.mp4" , season: "AUTUMN"},
+  { video: "images/winter.mp4", season: "WINTER"},
+];
+
+//KRIJIMI I VARIABLAVE PER QASJE TE ELEMENTEVE
+const video = document.getElementById("video");
+const video2 = document.getElementById("video2");
+const season = document.getElementById("season");
+
+//INDEX PER PERDITESIM, ACTIVE PER VIDEON MOMENTALE
+let index = 0;
+let active = 1; 
+
+//DEKLARIMI I FUNKSIONIT
+function changeSlide() {
+
+//MERR VLERAT SIPAS INDEX TE ARRAY
+  const nextSlide = slides[index];
+
+//ZGJEDH VIDEON MOMENTALE DHE TE ARDHSHME PER TE SHMANGUR VONESAT
+  const currentVideo = active === 1 ? video : video2;
+  const nextVideo = active === 1 ? video2 : video;
+
+//LARGIMI I VIDEOS PARAPRAKE DHE TEKSTIT
+  currentVideo.style.opacity = 0;
+  season.style.opacity = 0;
+  
+
+  //TIMEOUT I VENDOSUR PER SHFAQJE TE ELEMENTEVE TE RRADHES
+  setTimeout(() => {
+    
+    //NGARKIMI I VIDEOS SE RRADHES
+    nextVideo.src = nextSlide.video;
+    nextVideo.load();
+
+    //FUNKSION QE TREGON SE VIDEO E RRADHES ESHTE E GATSHME
+    nextVideo.oncanplaythrough = () => {
+
+
+    //SHFAQJA E VIDEOS SE RRADHES
+      nextVideo.play();
+      nextVideo.style.opacity = 1;
+
+    //SHFAQJA E TEKSTIT TE RRADHES
+      season.innerText = nextSlide.season;
+      requestAnimationFrame(() => {
+        season.style.opacity = 1;
+      });
+
+      //PERDITESIMI I "ACTIVE" DHE "INDEX" DUKE KONTROLLUAR KUSHTET
+      active = active === 1 ? 2 : 1;
+      index = (index + 1) % slides.length;
+
+      nextVideo.oncanplaythrough = null;
+    };
+  }, 300); //300 MS KOHA E SHFAQJES SE ELEMENTEVE
+}
+
+//THIRRJA E PARE E SLIDER
+changeSlide();
+
+//AUTOMATIZIMI, CDO 6000MS THIRR FUNKSIONIN
+setInterval(changeSlide, 6000);
+
+
+
+const hamburger = document.getElementById("hamburger");
+  const nav = document.getElementById("nav");
+
+  hamburger.addEventListener("click", () => {
+    nav.classList.toggle("open");
+  });
+
+
+
+
+</script>
