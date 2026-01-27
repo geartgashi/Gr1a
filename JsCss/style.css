@@ -1,9 +1,8 @@
 html{
     font-size: 100%;
+    scroll-behavior: smooth;
 }
 body {
-  overflow-x: hidden; 
-  
   max-width: 100%;   
   margin: 0;
   padding: 0;
@@ -35,6 +34,9 @@ body {
   box-shadow: 0px 1px 40px black;
   backdrop-filter: blur(2px);
   z-index: 10;
+}
+#toursHeader {
+  background: rgba(95,158,160,0.7);
 }
 .nav {
   display: flex;
@@ -104,24 +106,26 @@ body {
   display: inline-block;
   margin-top: 1vw; 
   padding: 1vw; padding-left: 2vw; padding-right: 2vw;
-  background: white;
-  color: cadetblue;
+  background-color: rgba(0, 0, 0, 0.3);  
+  color: white;
   border-radius: 30px;
   text-decoration: none;
   font-size: 1.5rem;
   transition: background-color 1.5s, color 1.5s; 
   box-shadow: 0px 7px 20px black;
+  backdrop-filter: blur(2px);
   border: 2px solid white;
 }
 #login:hover{ 
-    color: white; 
-    background-color: transparent;  
+    color: cadetblue; 
+    background: white;
 }
 .hr1{ height: 1vw; 
     width: 100%; 
     background-color: rgba(0, 0, 0, 0.4); 
     box-shadow: 0px 7px 20px black; 
     position: absolute; margin-top: 0; 
+    border: none;
     z-index: 2; 
 }
 
@@ -229,7 +233,13 @@ footer a:hover {
     border: none;
     color: white;
   }
-
+/*MOBILE INDEX*/
+#season{
+  font-size: 15vw;
+}
+#travel{
+  font-size: 4vw;
+}
 
 /*MOBILE FOOTER*/
 footer {
@@ -245,12 +255,46 @@ footer {
   }
 }
 /*TABLET*/
-@media (max-width: 1024px) {  
+@media (min-width: 768px) and (max-width: 1024px)  {  
+
+/*TABLET HEADER*/
+.header{
+  padding: 2vw;
+  height: auto;
+}
+.nav a{
+  font-size: 4vw;
+}
+
+
+
 /*TABLET index*/
 #box1 {
     top: 40%;
   }
+
+#season{
+    font-size: 15vw;
 }
+#travel{
+    font-size: 4vw;
+}
+#login{
+  font-size: 4vw;
+  border-radius: 99px;
+}
+
+/*TABLET FOOTER*/
+footer p{
+  font-size: 25px;
+}
+footer img{
+  width: 30px;
+  height: 30px;
+}
+
+}
+  
 
 
 

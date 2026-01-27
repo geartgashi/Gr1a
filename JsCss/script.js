@@ -1,75 +1,5 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Home</title>
-    <link rel="stylesheet" href="style.css">
-</head>
-<body>
 
-<section class="slider">
-
-  <video id="video" autoplay muted loop></video>
-  <video id="video2" autoplay muted loop></video>
-
-  <header class="header">
-
-    <button class="hamburger" id="hamburger">☰</button>    
-
-    <nav id="nav" class="nav">
-      <a id="active" href="index.html">Home</a>
-      <a href="tours.html">Tours</a>
-      <a href="about.html">About</a>
-      <a href="profile.html">Profile</a>
-    </nav>
-
-  </header>
-
-    <div id="box1">
-        <h3 id="travel">TRAVEL ANY SEASON</h3>
-        <h1 id="season"></h1>
-        <a id="login" href="login.html">Log In</a>
-    </div>
-  
-</section>
-
-<hr class="hr1">
-
-<section class="content">
-  <!-- CONTENT -->
-</section>
-
-
-
-
-
-
-    <footer>
-  <div class="footer-left">
-    <p>travel.company@info.com</p>
-    <p>Str. Filan Fisteku</p>
-
-    <div class="socials">
-      <img src="images/instagram.png" alt="">
-      <img src="images/facebook.png" alt="">
-      <img src="images/twitter.png" alt="">
-    </div>
-  </div>
-
-  <div class="footer-right">
-    <p><a href="">Terms of services</a> | <a href="">Privacy policy</a></p>
-    <p>© Travel Company 2025</p>
-    <p><a href="">Back to top ↑</a></p>
-  </div>
-</footer>
-
-
-</body>
-</html>
-
-<script>
-
+//SLIDER
 //KRIJIMI I ARRAY (ELEMENTET)
 const slides = 
 [
@@ -138,17 +68,19 @@ changeSlide();
 
 //AUTOMATIZIMI, CDO 6000MS THIRR FUNKSIONIN
 setInterval(changeSlide, 6000);
+//END OF SLIDER
 
 
 
+
+
+
+
+//BURGER MENU FOR PHONE 
 const hamburger = document.getElementById("hamburger");
   const nav = document.getElementById("nav");
 
   hamburger.addEventListener("click", () => {
     nav.classList.toggle("open");
   });
-
-
-
-
-</script>
+//END OF BURGER MENU
