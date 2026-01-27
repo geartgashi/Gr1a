@@ -7,7 +7,7 @@
     <link rel="stylesheet" href="../JsCss/style.css">
 </head>
 <body>
-  <header class="header" id="toursHeader">
+  <header class="header">
 
     <button class="hamburger" id="hamburger">☰</button>    
 

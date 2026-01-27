@@ -35,9 +35,6 @@ body {
   backdrop-filter: blur(2px);
   z-index: 10;
 }
-#toursHeader {
-  background: rgba(95,158,160,0.7);
-}
 .nav {
   display: flex;
   gap: 40px;
