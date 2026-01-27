@@ -8,7 +8,7 @@
 </head>
 <body>
 
-<section class="slider">
+<section id="top" class="slider">
 
   <video id="video" autoplay muted loop></video>
   <video id="video2" autoplay muted loop></video>
@@ -60,7 +60,7 @@
   <div class="footer-right">
     <p><a href="">Terms of services</a> | <a href="">Privacy policy</a></p>
     <p>© Travel Company 2025</p>
-    <p><a href="">Back to top ↑</a></p>
+    <p><a href="#top">Back to top ↑</a></p>
   </div>
 </footer>
 
@@ -141,14 +141,9 @@ setInterval(changeSlide, 6000);
 
 
 
-const hamburger = document.getElementById("hamburger");
-  const nav = document.getElementById("nav");
-
-  hamburger.addEventListener("click", () => {
-    nav.classList.toggle("open");
-  });
 
 
 
 
 </script>
+<script src="script.js"></script>
