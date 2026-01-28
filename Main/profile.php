@@ -7,7 +7,6 @@
     <link rel="stylesheet" href="../JsCss/style.css">
 </head>
 <body>
-
   <header class="header">
 
     <button class="hamburger" id="hamburger">☰</button>    
@@ -21,6 +20,7 @@
 
   </header>
 
+
 </body>
 </html>
-<script src="../Js/Css/script.js"></script>
+<script src="../JsCss/script.js"></script>
