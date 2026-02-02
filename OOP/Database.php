@@ -58,6 +58,7 @@ class Database
             );
         }
 
+
         //Kthen lidhjen
         return $this->connection;
     }
@@ -103,6 +104,7 @@ CREATE TABLE IF NOT EXISTS tours (
     date DATE NOT NULL,
     length INT NOT NULL,
     price DECIMAL(10,2) NOT NULL,
+    image VARCHAR(255),
     availability ENUM('available','sold out') DEFAULT 'available',
 
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
@@ -117,9 +119,7 @@ CREATE TABLE IF NOT EXISTS bookings (
     id INT AUTO_INCREMENT PRIMARY KEY,
     guests INT NOT NULL,
     user_id INT NOT NULL,
-    user_name VARCHAR(100) NOT NULL,
     tour_id INT NOT NULL,
-    tour_location VARCHAR(100) NOT NULL,
     FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE,
     FOREIGN KEY (tour_id) REFERENCES tours(id) ON DELETE CASCADE,
 
@@ -129,14 +129,13 @@ CREATE TABLE IF NOT EXISTS bookings (
 SQL;
         $connection->query($createTableSql);
 
-        //Krijimi i Tabeles RATINGS
+        //Krijimi i Tabeles REVIEWS
         $createTableSql = <<<SQL
 CREATE TABLE IF NOT EXISTS reviews (
     id INT AUTO_INCREMENT PRIMARY KEY,
     user_id INT NOT NULL,
-    user_name VARCHAR(100) NOT NULL,
     description TEXT NOT NULL,
-    stars char(1) NOT NULL,
+    stars ENUM('1','2','3','4','5') not null,
     
     FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE,
     
@@ -146,5 +145,27 @@ CREATE TABLE IF NOT EXISTS reviews (
 ) ENGINE=InnoDB
 SQL;
         $connection->query($createTableSql);
-    }
+    
+
+    //Krijimi i Tabeles COMPANY
+        $createTableSql = <<<SQL
+CREATE TABLE IF NOT EXISTS company (
+    id INT PRIMARY KEY AUTO_INCREMENT,   
+    name VARCHAR(255) NOT NULL,          
+    location VARCHAR(255) DEFAULT NULL,  
+    description TEXT,       
+    email VARCHAR(255) DEFAULT NULL,     
+    phone VARCHAR(50) DEFAULT NULL,              
+    facebook VARCHAR(255) DEFAULT NULL,  
+    instagram VARCHAR(255) DEFAULT NULL,
+    twitter VARCHAR(255) DEFAULT NULL,    
+    terms_of_service TEXT DEFAULT NULL,  
+    privacy_policy TEXT DEFAULT NULL,      
+
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+) ENGINE=InnoDB
+SQL;
+        $connection->query($createTableSql);
+}
 }

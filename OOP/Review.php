@@ -15,22 +15,38 @@ class Review
     }
 
     //Merr te gjithe reviews, rendit nga newest
-    public function all(): array{
+    public function readReview(): array{
         $result = $this->connection->query(
             'SELECT * FROM reviews ORDER BY created_at DESC'
         );
 
-        //Error check
-        if (!$result) {
-            return [];
-        }
 
         // fetch_all(MYSQLI_ASSOC) kthen të gjitha rreshtat
         // si array asociativ
         return $result->fetch_all(MYSQLI_ASSOC);
     }
 
-    public function find(int $id): ?array
+    //Merr reviews sipas id te user, rendit nga newest
+    public function getReviewsByUser($id): array{
+        $statement = $this->connection->prepare(
+            'SELECT *
+             FROM reviews 
+             WHERE user_id = ? 
+             ORDER BY created_at DESC'
+        );
+
+        $statement->bind_param('i', $id);
+        $statement->execute();
+
+        $result = $statement->get_result();
+        $reviews = $result->fetch_all(MYSQLI_ASSOC);
+
+        $statement->close();
+
+        return $reviews;
+    }
+
+    public function findReview(int $id): ?array
     {
         //Query per gjetje te Reviews permes ID '?'
         $statement = $this->connection->prepare(
@@ -51,15 +67,15 @@ class Review
     }
 
     //Krijimi i Review
-    public function create(int $user_id, string $user_name, string $description, int $stars ): void {
+    public function createReview(int $user_id, string $description, int $stars ): void {
 
         //Shtimi i Reciew
         $statement = $this->connection->prepare(
-            'INSERT INTO reviews (user_id, user_name, description, stars )  VALUES (?, ?, ?, ?)'
+            'INSERT INTO reviews (user_id, description, stars )  VALUES (?, ?, ?)'
         );
 
-        //issi DATATYPE te parametrave
-        $statement->bind_param('issi', $user_id, $user_name, $description, $stars );
+        //ssi DATATYPE te parametrave
+        $statement->bind_param('isi', $user_id, $description, $stars );
 
         $statement->execute();
         $statement->close();
@@ -68,7 +84,7 @@ class Review
     //Nryshimi i review nuk nevojitet
 
     //Fshirja e review
-    public function delete(int $id): void{
+    public function deleteReview(int $id): void{
 
         $statement = $this->connection->prepare(
             'DELETE FROM reviews WHERE id = ?'

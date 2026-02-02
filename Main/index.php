@@ -1,3 +1,7 @@
+<?php
+//Perfshirja e objekteve dhe startimi i sesionit
+require_once '../CRUD/crud.php';
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -7,7 +11,6 @@
     <link rel="stylesheet" href="../JsCss/style.css">
 </head>
 <body>
-
 <section id="top" class="slider">
 
   <video id="video" autoplay muted loop></video>
@@ -27,28 +30,52 @@
   </header>
 
     <div id="box1">
-        <h3 id="travel">TRAVEL ANY SEASON</h3>
+        <h3 class="travel">TRAVEL ANY SEASON</h3>
         <h1 id="season"></h1>
-        <a id="login" href="login.php">Log In</a>
+
+
+        <?php if (isset($_SESSION['user_role'])): ?>
+          <h3 class="travel">Welcome, <?php echo $_SESSION['user_name'];?></h3>
+        <?php else: ?>
+          <a id="login" href="login.php">Log In</a>
+        <?php endif;?>
     </div>
   
 </section>
 
 <hr class="hr1">
 
-<section class="content">
-  <!-- CONTENT -->
-</section>
+<div class="content">
+  
+    <!--Lista per lexim reviews-->
+    
+        <h2>Feedback from Our Valued Customers</h2>
+
+        <?php if (count($reviews) === 0): ?>
+            <p>No reviews available.</p>
+        <?php else: ?>
+          <?php foreach ($reviews as $review): ?>
+                <div class="review-show">
+                    <?php ($user = $userObj->findUser($review['user_id'])); ?>
+                    <p><?php echo ($user['email']); ?></p>  
+                    <p><?php echo ($review['description']); ?></p>
+                    <p><?php for ($i = 0; $i < (int)$review['stars']; $i++) {echo '🌟';}?></p>
+                </div>
+            <?php endforeach; ?>
+        <?php endif; ?>
+    
+
+</div>
 
 
 
 
 
 
-    <footer>
+<footer>
   <div class="footer-left">
-    <p>travel.company@info.com</p>
-    <p>Str. Filan Fisteku</p>
+    <p><?php echo $company['email']?></p>
+    <p><?php echo $company['location']?></p>
 
     <div class="socials">
       <img src="../images/instagram.png" alt="">
@@ -59,7 +86,7 @@
 
   <div class="footer-right">
     <p><a href="../Optional/termsOfService.php">Terms of services</a> | <a href="../Optional/privacyPolicy.php">Privacy policy</a></p>
-    <p>© Travel Company 2025</p>
+    <p><?php echo $company['name']?></p>
     <p><a href="#top">Back to top ↑</a></p>
   </div>
 </footer>

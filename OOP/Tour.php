@@ -14,23 +14,19 @@ class Tour
         $this->connection = $connection;
     }
 
-    //Merr te gjithe tours, rendit nga newest
-    public function all(): array{
+    //Merr te gjithe tours, rendit me data
+    public function readTour(): array{
         $result = $this->connection->query(
-            'SELECT * FROM tours ORDER BY created_at DESC'
+            'SELECT * FROM tours ORDER BY date ASC'
         );
 
-        //Error check
-        if (!$result) {
-            return [];
-        }
 
         // fetch_all(MYSQLI_ASSOC) kthen të gjitha rreshtat
         // si array asociativ
         return $result->fetch_all(MYSQLI_ASSOC);
     }
 
-    public function find(int $id): ?array
+    public function findTour(int $id): ?array
     {
         //Query per gjetje te Tour permes ID '?'
         $statement = $this->connection->prepare(
@@ -51,38 +47,38 @@ class Tour
     }
 
     //Krijimi i Tour
-    public function create(string $location, int $date, int $length, double $price, string $availability): void {
+    public function createTour(string $location, string $date, int $length, float $price, string $image): void {
 
         //Shtimi i Tour
         $statement = $this->connection->prepare(
-            'INSERT INTO tours (location, date, length, price, availability)  VALUES (?, ?, ?, ?, ?)'
+            'INSERT INTO tours (location, date, length, price, image)  VALUES (?, ?, ?, ?, ?)'
         );
 
-        //siids DATATYPE te parametrave
-        $statement->bind_param('siids', $location, $date, $length, $price, $availability );
+        //ssids DATATYPE te parametrave
+        $statement->bind_param('ssids', $location, $date, $length, $price, $image);
 
         $statement->execute();
         $statement->close();
     }
 
     //Nryshimi i tour
-    public function update(int $id, string $location, int $date, int $length, double $price, string $availability ): void {
+    public function updateTour(int $id, string $location, string $date, int $length, float $price, string $image, string $availability ): void {
         
         $statement = $this->connection->prepare(
             'UPDATE tours 
-             SET location = ?, date = ?, length = ?, price = ?, availability = ? 
+             SET location = ?, date = ?, length = ?, price = ?, image = ?, availability = ? 
              WHERE id = ?'
         );
 
-        //isiids DATATYPE te parametrave
-        $statement->bind_param('isiids', $location, $date, $length, $price, $availability, $id );
+        //ssidssi DATATYPE te parametrave
+        $statement->bind_param('ssidssi', $location, $date, $length, $price, $image, $availability, $id );
 
         $statement->execute();
         $statement->close();
     }
 
     //Fshirja e tour
-    public function delete(int $id): void{
+    public function deleteTour(int $id): void{
 
         $statement = $this->connection->prepare(
             'DELETE FROM tours WHERE id = ?'
@@ -94,4 +90,6 @@ class Tour
         $statement->execute();
         $statement->close();
     }
+
+    
 }

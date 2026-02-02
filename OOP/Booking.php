@@ -15,22 +15,37 @@ class Booking
     }
 
     //Merr te gjithe bookings, rendit nga newest
-    public function all(): array{
+    public function readBooking(): array{
         $result = $this->connection->query(
             'SELECT * FROM bookings ORDER BY created_at DESC'
         );
-
-        //Error check
-        if (!$result) {
-            return [];
-        }
 
         // fetch_all(MYSQLI_ASSOC) kthen të gjitha rreshtat
         // si array asociativ
         return $result->fetch_all(MYSQLI_ASSOC);
     }
 
-    public function find(int $id): ?array
+    //Merr bookings sipas id te user, rendit nga newest
+    public function getBookingsByUser($id): array{
+        $statement = $this->connection->prepare(
+            'SELECT *
+             FROM bookings 
+             WHERE user_id = ? 
+             ORDER BY created_at DESC'
+        );
+
+        $statement->bind_param('i', $id);
+        $statement->execute();
+
+        $result = $statement->get_result();
+        $bookings = $result->fetch_all(MYSQLI_ASSOC);
+
+        $statement->close();
+
+        return $bookings;
+    }
+
+    public function findBooking(int $id): ?array
     {
         //Query per gjetje te Booking permes ID '?'
         $statement = $this->connection->prepare(
@@ -51,15 +66,15 @@ class Booking
     }
 
     //Krijimi i Booking
-    public function create(int $guests, int $user_id, string $user_name, int $tour_id, string $tour_location ): void {
+    public function createBooking(int $guests, int $user_id, int $tour_id): void {
 
         //Shtimi i Booking
         $statement = $this->connection->prepare(
-            'INSERT INTO bookings (guests, user_id, user_name, tour_id, tour_location )  VALUES (?, ?, ?, ?)'
+            'INSERT INTO bookings (guests, user_id, tour_id )  VALUES (?, ?, ?)'
         );
 
-        //iisis DATATYPE te parametrave
-        $statement->bind_param('iisis', $user_id, $user_name, $tour_id, $tour_location );
+        //isi DATATYPE te parametrave
+        $statement->bind_param('iii', $guests, $user_id, $tour_id );
 
         $statement->execute();
         $statement->close();
@@ -69,7 +84,7 @@ class Booking
     
 
     //Fshirja e booking
-    public function delete(int $id): void{
+    public function deleteBooking(int $id): void{
 
         $statement = $this->connection->prepare(
             'DELETE FROM bookings WHERE id = ?'
