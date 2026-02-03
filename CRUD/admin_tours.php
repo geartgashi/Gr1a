@@ -83,13 +83,13 @@ require_once 'crud.php';
                     <label>Price per person</label>
                     <input type="number" name="price" step="0.01" min="0" value="<?php echo (($editTour['price'] ?? '0.00')); ?>" required>
 
-                    <?php if(!$editTour):?>   
+                       
                         <label>Image</label>
                         <label class="file-upload">
                             <input type="file" name="image" value="<?php echo ($editTour['image'] ?? ''); ?>" required>
                         <span>Choose file</span>
                         </label>
-                    <?php endif;?>
+                    
                         
 
                     <label>Availability</label>
