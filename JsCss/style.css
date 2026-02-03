@@ -185,18 +185,17 @@ body {
   grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
   justify-content: center;
   align-items: center;
-  gap: 24px;
+  gap: 4rem;
 }
 .tour-card {
   background: transparent;
   border-radius: 30px;
   overflow: hidden;
-  padding: 16px;
+  padding: 1.5rem;
   width: 100%;
   max-width: 320px;
   display: flex;
   flex-direction: column;
-  align-items: center;
   gap: 1rem;
   box-shadow: 0 6px 18px rgba(0, 0, 0, 0.3);
   transition: all 0.5s;
@@ -214,7 +213,7 @@ body {
 }
 .tour-card img {
   align-self: center;
-  width: 95%;
+  width: 100%;
   height: 9rem;
   object-fit: cover;
   border-radius: 10px;
@@ -240,7 +239,6 @@ body {
   justify-content: space-between;
 }
 .tour-card select {
-  
   border-radius: 6px;
   border: 1px solid black;
   outline: none;
@@ -254,6 +252,7 @@ body {
   border-radius: 8px;
   font-weight: 600;
   cursor: pointer;
+  width: 100%;
 }
 #idk{
   color: cadetblue;
@@ -308,7 +307,10 @@ body {
 }
 #del-review a{
   text-decoration: none;
+  border: none;
+  background-color: transparent;
   color: white;
+  box-shadow: none;
 }
 .review-create a, .tour-card a{
   text-decoration: none;
