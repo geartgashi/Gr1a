@@ -70,7 +70,7 @@ require_once 'crud.php';
                 </h2>
 
 
-                <?php if($editCompany): ?>
+                <?php if($editCompany): ?>  
                     <div class="company-edit-form-container">
                     <form method="post" class="company-edit-form">
                     

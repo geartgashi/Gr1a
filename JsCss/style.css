@@ -257,7 +257,11 @@ body {
 #idk{
   color: cadetblue;
 }
-
+#soldout{
+  font-size: 1.2rem;
+  color: red;
+  text-align: center;
+}
 .tour-card button:hover {
   background: orange;
 }
@@ -880,8 +884,7 @@ body {
     padding: 0.35rem 0.6rem;
 }
 .tours img{
-  border-radius: 50px;
-  border: 1px solid white;
+  border-radius: 15px;
   width:7rem;
 }
 
