@@ -29,7 +29,7 @@ $reviews = $reviewObj->readReview();
 $company = $companyObj->readCompany();
 
 
-//action variabla qe percakton cilin veprim nga CRUD do bejme permes GET || POST
+//action variabla qe ruan cilin veprim nga CRUD do bejme permes GET || POST
 $action = $_POST['action'] ?? $_GET['action'] ?? '';
 
 //------------------------------------------login-----------------------------------------------
@@ -457,7 +457,6 @@ $company = $companyObj ? $companyObj->readCompany() : [];
 
 
 
-//$tour = $tourObj->findTour($);
 
 
 
